@@ -1,1 +1,1 @@
-go run main.go -m ollama:qwen2.5:3b --config .mcp.json
+go run main.go -m ollama:qwen2.5:3b --config .mcp.json --debug --message-window 20
