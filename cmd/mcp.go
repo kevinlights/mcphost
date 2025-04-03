@@ -65,6 +65,7 @@ type MCPConfig struct {
 
 type ServerConfig struct {
 	Command string            `json:"command"`
+	Enabled bool              `json:"enabled"`
 	Args    []string          `json:"args"`
 	Env     map[string]string `json:"env,omitempty"`
 }
@@ -149,6 +150,9 @@ func createMCPClients(
 	clients := make(map[string]*mcpclient.StdioMCPClient)
 
 	for name, server := range config.MCPServers {
+		if !server.Enabled {
+			continue
+		}
 		var env []string
 		for k, v := range server.Env {
 			env = append(env, fmt.Sprintf("%s=%s", k, v))
